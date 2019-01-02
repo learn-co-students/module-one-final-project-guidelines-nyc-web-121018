@@ -1,3 +1,46 @@
+
+Nonprofit Matcher allows a user to learn more about different nonprofits.
+I used the orghunter api to gather their list of NY State nonprofits and gather the following information:
+  1. charityName
+  2. website/url
+  3. city
+  4. zipCode
+  5. ein number
+  6. cause/category
+  
+I used faker to get volunteer data for my database.
+
+My domain model is :
+  nonprofits have many volunteers through volunteer_opportunities
+  volunteers have many nonprofits through volunteer_opportunities
+  volunteer_opportunities belong to volunteers
+  volunteer_opportunities belong to nonprofits
+
+The user will be prompted to select an option to request their desired information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Module One Final Project Guidelines
 
 Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
