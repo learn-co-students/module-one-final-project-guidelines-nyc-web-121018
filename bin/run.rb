@@ -1,13 +1,12 @@
  #!/usr/bin/env ruby
 require_relative '../config/environment.rb'
-require_relative '../lib/greet.rb'
-require_relative '../lib/api_communicator.rb'
+# require_relative '../lib/greet.rb'
+# require_relative 'api_communicator.rb'
 
 welcome
 
-print_org_by_cause(category)
-
-# puts "the user entered #{category}"
+binding.pry
+0
 
 # Causes/Categories
 # "1. Employment, Job-Related"

@@ -24,23 +24,12 @@ org_eins = [161417558,
 133691071,
 300456687]
 
+#to access API
 response = RestClient.get("http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY")
 response_hash = JSON.parse(response)
 orgs = response_hash["data"]
 
-# @page_url = "http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY"
-#   @org_array = pull_org_data
-#   @org_array.each do |org|
-#     new_nonprofit = Nonprofit.new(
-#       name: org[“charityName”],
-#       city: org["city"],
-#       url: org[“url”],
-#       ein: org["ein"],
-#       zipcode: org["zipCode"]
-#     )
-#     new_nonprofit.save
-#   end
-
+#to be used to populate nonprofit table in db - iterating through eins to gather necessary info.
 def populate_nonprofit_table(org_eins)
   org_eins.each do |ein|
   Nonprofit.create(charityName: name(ein),city: city(ein), url: url(ein), ein:ein(ein), zipcode: zipcode(ein))
@@ -48,8 +37,7 @@ end
 end
 
 binding.pry
-# populate_nonprofit_table(org_eins)
-# #code for inserting volunteer data using faker
+# #code for inserting volunteer data using faker ----this worked 
 # puts "creating volunteers"
 # 40.times do
 #   Volunteer.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, age: (0..100).to_a.sample)

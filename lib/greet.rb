@@ -1,3 +1,6 @@
+# require "./config/environment.rb"
+require 'pry'
+
 eins = [
 161417558,
 # : CENTER OF SOLITUDE INC,
@@ -41,25 +44,11 @@ eins = [
 # EMPIRE STATE FOUNDATION
 ]
 
-# def welcome
-#   "Welcome to Nonprofit Matcher, what cause are you passionate about?"
-#   puts welcome
-# end
-
-category = gets.chomp
-
-  def print_org_by_cause(category)
-      response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
-      response_hash = JSON.parse(response)
-      orgs = response_hash["data"]
-      orgs.each do |org|
-        if org['category'] == category
-          puts "Name: #{org['charityName']}"
-        end
-      end
-  end
-
-######################################
+def welcome
+puts "Welcome to Nonprofit Matcher! What is your name?"
+name = gets.strip
+puts "Hi #{name}"
+end
 
 def list(eins)
   eins.each_with_index do |ein, i|
@@ -67,31 +56,51 @@ def list(eins)
   end
 end
 
+############################ Start of CLI #######################################
+def get_info
   input =""
   while input
-    puts "Welcome to Nonprofit Matcher, please make a selection:
-    1. Find organization by EIN
-    2. Get cause by EIN #
-    3. EXIT"
+    puts "Welcome to Nonprofit Matcher, please make a selection(ex: 1,2,3):
+    1. View all organizations
+    2. View all EIN #'s
+    3. Search for org by EIN
+    4. Search by city
+    5. Search by zipcode
+    6. Search by cause
+    7. Get website info by EIN
+    8. View a nonprofit's volunteers
+    9. EXIT"
+
     input = gets.downcase.strip
     case input
     when '1'
-      list(eins)
+      print_all
     when '2'
-      print_org_info
+      list(eins)
     when '3'
+      puts "Please enter an ein number"
+      ein=""
+      ein = gets.strip
+      name(ein)
+    when '4'
+      print_org_by_city(city)
+      city ""
+      city= gets.strip
+    when '5'
+      find_by_zipcode(zipcode)
+    when '6'
+      print_org_by_cause(category)
+    when '7'
+      ein=""
+      ein = gets.strip
+      url(ein)
+    when '8'
+      #not sure how to grab content from the db and pull it in for this method
+    when '9'
       break
     else
-      "Please make a selection."
+      "Please make a selection from the list provided."
     end
   end
-
-
-
-
-
-
-  # puts "the user entered #{category}"
-
-#
-# print_by_org_name(name)
+end
+# binding.pry
