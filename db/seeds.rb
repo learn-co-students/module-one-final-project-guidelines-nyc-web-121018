@@ -32,14 +32,15 @@ orgs = response_hash["data"]
 #to be used to populate nonprofit table in db - iterating through eins to gather necessary info.
 def populate_nonprofit_table(org_eins)
   org_eins.each do |ein|
-  Nonprofit.create(charityName: name(ein),city: city(ein), url: url(ein), ein:ein(ein), zipcode: zipcode(ein))
-end
+    Nonprofit.create(charityName: charityname(ein), city: city(ein), url: url(ein), ein: ein(ein) , zipcode: zipcode(ein), cause: cause(ein))
+  end
 end
 
-binding.pry
-# #code for inserting volunteer data using faker ----this worked 
-# puts "creating volunteers"
-# 40.times do
-#   Volunteer.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, age: (0..100).to_a.sample)
-# end
-# puts "made"
+populate_nonprofit_table(org_eins)
+
+# #code for inserting volunteer data using faker ----this worked
+puts "creating volunteers"
+40.times do
+  Volunteer.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, age: (0..100).to_a.sample)
+end
+puts "made"

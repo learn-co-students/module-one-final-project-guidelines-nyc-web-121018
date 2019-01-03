@@ -43,6 +43,11 @@ eins = [
 300456687
 # EMPIRE STATE FOUNDATION
 ]
+# def list(eins)
+#   eins.each_with_index do |ein, i|
+#     puts "#{i+1}. #{ein}"
+#   end
+# end
 
 def welcome
 puts "Welcome to Nonprofit Matcher! What is your name?"
@@ -50,57 +55,67 @@ name = gets.strip
 puts "Hi #{name}"
 end
 
-def list(eins)
-  eins.each_with_index do |ein, i|
-    puts "#{i+1}. #{ein}"
-  end
-end
-
-############################ Start of CLI #######################################
-def get_info
+def prompt_user
   input =""
   while input
-    puts "Welcome to Nonprofit Matcher, please make a selection(ex: 1,2,3):
+    puts "Please make a selection(ex: 1,2,3):
     1. View all organizations
     2. View all EIN #'s
     3. Search for org by EIN
-    4. Search by city
-    5. Search by zipcode
-    6. Search by cause
+    4. Find a nonprofit by city
+    5. Find a nonprofit by zipcode
+    6. Search nonprofits by cause
     7. Get website info by EIN
-    8. View a nonprofit's volunteers
-    9. EXIT"
+    8. EXIT"
 
     input = gets.downcase.strip
     case input
     when '1'
       print_all
     when '2'
-      list(eins)
+      print_eins
     when '3'
+      print_eins
       puts "Please enter an ein number"
-      ein=""
       ein = gets.strip
-      name(ein)
+      puts ""
+      org_by_ein(ein)
+      puts ""
     when '4'
-      print_org_by_city(city)
-      city ""
+      print_cities
+      puts "Please enter a city from the above list"
       city= gets.strip
+      puts ""
+      print_org_by_city(city)
+      puts ""
     when '5'
+      puts "Please enter an 8 digit zipcode in NYS"
+      zipcode = gets.chomp
+      puts ""
       find_by_zipcode(zipcode)
+      puts ""
     when '6'
+      print_causes
+      puts ""
+      puts "Please enter a cause from the above list"
+      category = gets.chomp
+      puts ""
       print_org_by_cause(category)
+      puts ""
     when '7'
+      print_eins
+      puts "Please enter an EIN from the list above"
       ein=""
       ein = gets.strip
-      url(ein)
+      puts ""
+      get_url_by_ein(ein)
+      puts ""
     when '8'
-      #not sure how to grab content from the db and pull it in for this method
-    when '9'
       break
     else
-      "Please make a selection from the list provided."
+      puts "Please make a selection from the list provided."
     end
   end
 end
-# binding.pry
+
+ # binding.pry

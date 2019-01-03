@@ -1,13 +1,8 @@
  #!/usr/bin/env ruby
 require_relative '../config/environment.rb'
-# require_relative '../lib/greet.rb'
-# require_relative 'api_communicator.rb'
 
 welcome
-
-binding.pry
-0
-
+prompt_user 
 # Causes/Categories
 # "1. Employment, Job-Related"
 # "2. Not provided"

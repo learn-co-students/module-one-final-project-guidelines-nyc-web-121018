@@ -2,71 +2,76 @@ require 'rest-client'
 require 'json'
 require 'pry'
 
-
 #accessing api
  response = RestClient.get("http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY")
  response_hash = JSON.parse(response)
  orgs = response_hash["data"]
 
 # get org name when given an ein number
-def name(ein)
+def charityname(ein)
   response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
-  orgs.each do |org|
-  if org['ein'] = ein
-    return org['charityName']
+  found_org = orgs.find do |org|
+    org["ein"].to_i == ein
   end
- end
-end
+  found_org["charityName"]
+  end
 
 #find org city by inputting ein number - to populate db
 def city(ein)
   response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
-  orgs.each do |org|
-    if org['ein'] = ein
-      return org['city']
-    end
+  found_org = orgs.find do |org|
+    org["ein"].to_i == ein
   end
-end
+  found_org["city"]
+  end
 
 # find url by ein number - to populate db
 def url(ein)
   response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
-  orgs.each do |org|
-    if org['ein'] = ein
-      return org['url']
-    end
+  found_org = orgs.find do |org|
+  org["ein"].to_i == ein
   end
-end
+  found_org["url"]
+  end
+
 
 # grab ein number - to populate db
 def ein(ein)
   response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
-  orgs.each do |org|
-    if org['ein'] = ein
-      return org['ein']
-    end
+  found_org = orgs.find do |org|
+  org["ein"].to_i == ein
   end
-end
+  found_org["ein"]
+  end
 
 # get zipcode when you input the ein number
 def zipcode(ein)
   response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
-  orgs.each do |org|
-    if org['ein'] = ein
-    return org['zipCode']
-    end
+  found_org = orgs.find do |org|
+  org["ein"].to_i == ein
   end
-end
+  found_org["zipCode"]
+  end
+
+def cause(ein)
+  response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
+  response_hash = JSON.parse(response)
+  orgs = response_hash["data"]
+  found_org = orgs.find do |org|
+  org["ein"].to_i == ein
+  end
+  found_org["category"]
+  end
 
 #finds org by given zipcode - 8 digit
 def find_by_zipcode(zipcode)
@@ -74,8 +79,10 @@ def find_by_zipcode(zipcode)
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
   orgs.each do |org|
-    if org['zipCode'] = zipcode
-    return org['zipCode']
+    if org['zipCode'] == zipcode
+    puts ""
+    puts "FOUND: #{org['charityName']}"
+    puts ""
     end
   end
 end
@@ -114,8 +121,8 @@ def print_org_by_city(city)
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
   orgs.each do |org|
-    if org['city'] == city
-      return "Name: #{org['charityName']}"
+  if org['city'] == city
+  puts "Result: #{org['charityName']}"
     end
   end
 end
@@ -127,7 +134,8 @@ def print_org_by_cause(category)
     orgs = response_hash["data"]
     orgs.each do |org|
       if org['category'] == category
-        puts "Name: #{org['charityName']}"
+        puts "FOUND: #{org['charityName']}"
+        puts "__________________________________"
       end
     end
 end
@@ -165,7 +173,17 @@ def print_causes
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
   orgs.each do |org|
-  return "Cause:#{org['category']}"
+  puts "Cause:#{org['category']}"
+end
+end
+
+def print_eins
+  response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
+  response_hash = JSON.parse(response)
+  orgs = response_hash["data"]
+  orgs.each do |org|
+  puts "#{org['charityName']} \n EIN:#{org['ein']}"
+  puts "_______________________________________"
 end
 end
 
@@ -183,6 +201,28 @@ def print_all
       puts "Cause:#{org['category']}"
       puts "____________________________"
   end
+end
+
+def org_by_ein(ein)
+  response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
+  response_hash = JSON.parse(response)
+  orgs = response_hash["data"]
+  orgs.each do |org|
+  if org['ein'] == ein
+  puts "Result: #{org['charityName']}"
+  end
+ end
+end
+
+def get_url_by_ein(ein)
+  response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
+  response_hash = JSON.parse(response)
+  orgs = response_hash["data"]
+  orgs.each do |org|
+  if org['ein'] == ein
+  puts "Result: #{org['url']}"
+  end
+ end
 end
 
 # binding.pry
