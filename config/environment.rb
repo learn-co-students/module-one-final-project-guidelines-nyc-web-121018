@@ -6,7 +6,7 @@ require 'json'
 require 'pry'
 require 'color'
 require_relative '../lib/colorr.rb'
-require_relative '../lib/colorrPallet.rb'
+require_relative '../lib/colorr_pallet.rb'
 require_relative '../lib/pallet.rb'
 require_relative '../lib/user.rb'
 

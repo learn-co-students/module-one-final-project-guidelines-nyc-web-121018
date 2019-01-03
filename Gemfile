@@ -9,3 +9,4 @@ gem "require_all"
 gem "rest-client"
 gem "colorize"
 gem 'color', '~> 1.8'
+gem 'rake'
