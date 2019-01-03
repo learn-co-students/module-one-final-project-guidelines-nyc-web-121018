@@ -6,6 +6,7 @@ class CreateNonprofits < ActiveRecord::Migration[5.0]
       t.string :url
       t.integer :ein
       t.integer :zipcode
+      t.string :cause
     end
   end
 end
