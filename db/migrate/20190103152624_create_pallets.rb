@@ -5,7 +5,8 @@ class CreatePallets < ActiveRecord::Migration[5.0]
       t.string :color1
       t.string :color2
       t.string :color3
+      t.string :color4
+      t.integer :user_id #forigen key to user
     end
-    add_column :color_pallets, :user_id, :integer #user forigen key
   end
 end
