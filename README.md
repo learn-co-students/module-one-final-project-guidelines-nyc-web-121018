@@ -1,14 +1,18 @@
 
 Nonprofit Matcher allows a user to learn more about different nonprofits.
-I used the orghunter api to gather their list of NY State nonprofits. This included the following information:
-  1. charityName
-  2. website/url
-  3. city
-  4. zipCode
-  5. ein number (employer identification number)
-  6. cause/category
+I used the orghunter api to gather their list of NY State nonprofits and populate my nonprofits table.
 
-I used faker to get volunteer data for my database.
+With Match Maker you can do the following:
+1. View all organizations
+2. View all EIN #'s
+3. Search for org by EIN
+4. Find a nonprofit by city
+5. Find a nonprofit by zipcode
+6. Search nonprofits by cause
+7. Get website info by EIN
+8. EXIT"
+
+I used a faker gem to populate sample volunteer data into my database.
 
 My domain model is :
   nonprofits have many volunteers through volunteer_opportunities
@@ -16,7 +20,8 @@ My domain model is :
   volunteer_opportunities belong to volunteers
   volunteer_opportunities belong to nonprofits
 
-The user will be prompted to select an option from a list of options. Depending on their selection they will receive different data.
+The user will be prompted to select an option from a list of options. Depending on their selection they
+will receive different data.
 
 This is meant to help the user connect to different nonprofits either by location or interests.
 
