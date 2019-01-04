@@ -45,10 +45,25 @@ class Colorr < ActiveRecord::Base
     #prints name
 
   def self.print_name(hexval)
-    if @@hex_colors_hash.has_key?(hexval)
-      puts "Your color name is: #{@@hex_colors_hash[hexval]}"
-    else
-      puts "that color does not exist yet!"
+    # if @@hex_colors_hash.has_key?(hexval)
+    #   puts "Your color's name is: #{@@hex_colors_hash[hexval]}"
+    # else
+    #   puts "Your color does not have a name yet!"
+    # end
+    Colorr.all.each do |instance|
+      if hexval == instance.hexvalue
+        puts "Your color's name is: #{instance.name}"
+      end
+    end
+  end
+
+  def self.print_other_pallets(hexval)
+    Colorr.all.each do |instance|
+      if hexval == instance.hexvalue
+        pallets_instance_arr = []
+        pallets_instance_arr << instance.pallets
+        puts pallets_instance_arr
+      end
     end
   end
   #tests worked
