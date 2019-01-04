@@ -230,6 +230,23 @@ def org_by_ein(ein)
  end
 end
 
+def org_by_name(name)
+  response = RestClient.get"http://data.orghunter.com/v1/charitysearch?user_key=#{ENV['API_KEY']}&state=NY"
+  response_hash = JSON.parse(response)
+  orgs = response_hash["data"]
+  orgs.each do |org|
+  if org['charityName'] == name
+    puts "Name: #{org['charityName']}"
+    puts "City: #{org['city']}"
+    puts "Zipcode: #{org['zipCode']}"
+    puts "EIN: #{org['ein']}"
+    puts "Website:#{org['url']}"
+    puts "Cause:#{org['category']}"
+    puts "____________________________"
+  end
+ end
+end
+
 def get_url_by_ein(ein)
   response = RestClient.get"http://data.orghunter.com/v1/charitysearch?user_key=#{ENV['API_KEY']}&state=NY"
   response_hash = JSON.parse(response)
@@ -244,7 +261,7 @@ end
 def add_volunteer(first_name,last_name, age)
  Volunteer.create(id: nil ,first_name: first_name, last_name:last_name, age:age)
  puts ""
- puts "Thank you, #{first_name} you have been added!"
+ puts "Thank you, #{first_name} you have been added!👍"
  puts ""
 end
 # binding.pry

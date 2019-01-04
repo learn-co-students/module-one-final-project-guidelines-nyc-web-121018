@@ -43,11 +43,6 @@ eins = [
 300456687
 # EMPIRE STATE FOUNDATION
 ]
-# def list(eins)
-#   eins.each_with_index do |ein, i|
-#     puts "#{i+1}. #{ein}"
-#   end
-# end
 
 def welcome
 puts "Welcome to Nonprofit Matcher! What is your name?"
@@ -76,17 +71,21 @@ def prompt_user
     when '2'
       print_eins
     when '3'
-      print_eins
-      puts "Please enter an ein number"
-      ein = gets.strip
-      puts " You chose: #{ein} "
-      org_by_ein(ein)
+      print_orgs
+      puts ""
+      puts "Please enter a name from the list above"
+      name = gets.strip
+      puts " You chose: #{name}"
+      puts "________________________"
+      puts ""
+      org_by_name(name)
       puts ""
     when '4'
       print_cities
       puts "Please enter a city from the above list"
       city= gets.strip
       puts " You chose: #{city} "
+      puts ""
       print_org_by_city(city)
       puts ""
     when '5'
