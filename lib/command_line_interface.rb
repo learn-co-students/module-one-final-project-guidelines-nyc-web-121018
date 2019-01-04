@@ -325,9 +325,15 @@ end
 
 def lookup_bill_by_number(number)
   bill = Bill.where(:pp_bill_id => number+"-115")
-  display_bill(bill)
-  display_menu
+    if bill.exists?
+      display_bill(bill)
+      display_menu
+    else
+      puts "Check your inputs, I don't have that bill on hand..."
+      display_menu
+    end
 end
+
 #
 # def get_sponsor_from_user
 #
