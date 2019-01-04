@@ -192,15 +192,15 @@ class Pallet < ActiveRecord::Base
     Pallet.rgb_arr_to_hex(comp_rgb_arr)
   end
 
-  # def self.print_pallet_from_id(id)
-  #   Pallet.all.each do |instance|
-  #     if id == instance.id
-  #       puts "Your color's Analogous warm is: #{instance.analogous_warm}"
-  #       puts "Your color's Analogous cool is: #{instance.analogous_cool}"
-  #       puts "Your color's Complement is: #{instance.complementary}"
-  #     end
-  #   end
-  # end
+  def self.print_pallet_from_id(id)
+    Pallet.all.each do |instance|
+      if id == instance.id
+        puts "Your color's Analogous warm is: #{instance.analogous_warm}"
+        puts "Your color's Analogous cool is: #{instance.analogous_cool}"
+        puts "Your color's Complement is: #{instance.complementary}"
+      end
+    end
+  end
 
   def self.print_pallet(hexval)
     Pallet.all.each do |instance|

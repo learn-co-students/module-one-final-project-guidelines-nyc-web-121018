@@ -28,14 +28,6 @@ end
   )
 end
 
-
-
-#for each color created by the pallet
-#find its color_id
-#class color.each do |instance|
-# => instance.hex == :analogous_warm
-# => return instance.id
-
 #FOR EACH Pallet
 #THERE ARE MANY colors
 

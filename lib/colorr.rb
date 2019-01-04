@@ -60,9 +60,7 @@ class Colorr < ActiveRecord::Base
   def self.print_other_pallets(hexval)
     Colorr.all.each do |instance|
       if hexval == instance.hexvalue
-        pallets_instance_arr = []
-        pallets_instance_arr << instance.pallets
-        puts pallets_instance_arr
+        return instance.pallets.ids
       end
     end
   end

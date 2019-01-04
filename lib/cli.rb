@@ -1,37 +1,38 @@
 class Cli
   def self.welcome
-    puts "Hello! Welcome to the Colorr cli!"
+    puts "🌈 Hello! Welcome to the Colorr cli! 🌈"
   end
 
   def self.help
     help = <<-HELP
-    Commands:
-    - help : displays this message
-    - colorr : lets you choose a color to palletize(tm)
-    - learn : learn about the pallets!
-    - exit : exits this program
+    🌈 Commands:
+    ❤️  help : displays this message
+    🧡 colorr : lets you choose a color to palletize(tm)
+    💛 learn : learn about the pallets!
+    💚 exit : exits this program
     HELP
 
     puts help
   end
 
   def self.colorr
-    puts "Please enter a Hex Color Code:"
+    puts "🌈 Please enter a Hex Color Code:"
     input_hex_color = gets.chomp.to_s
 
     colorr_menu = <<-HELP
-    Commands:
-    - 1 : view the color's name
-    - 2 : view the color's pallet
-    - 3 : view other pallets that contain the color
-    - 4 : back to help
+    🌈 Commands:
+    💜 1 : view the color's name
+    💙 2 : view the color's pallet
+    💚 3 : view other pallets that contain the color
+    💛 4 : view the color with the most pallets
+    🧡 5 : back to help
     HELP
 
     puts colorr_menu
 
     input = ""
     while input
-      puts "Please enter a command:"
+      puts "🌈 Please enter a command:"
       input = gets.chomp.to_s
       case input
       when "1"
@@ -39,8 +40,14 @@ class Cli
       when "2"
         Pallet.print_pallet(input_hex_color)
       when "3"
-        Colorr.print_other_pallets(input_hex_color)
+        x = Colorr.print_other_pallets(input_hex_color)
+        x.each do |i|
+          Pallet.print_pallet_from_id(i)
+        end
       when "4"
+        x = ColorrPallet.color_with_most_pallets
+        puts Colorr.find(x.join.to_i).name
+      when "5"
         Cli.exit_colorr
         Cli.help
         break
