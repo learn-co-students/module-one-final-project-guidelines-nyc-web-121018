@@ -130,10 +130,10 @@ def display_tag_menu
     puts "Which rep would you like to tag?"
     input = gets.chomp.to_i
     taggable = UserRep.where(user_id: @cli_user.id)[input-1]
-    rep = Representative.where(id: UserRep.where(user_id: @cli_user.id)[input-1].representative_id)
+    rep = Representative.where(id: UserRep.where(user_id: @cli_user.id)[input-1].representative_id)[0]
     puts "What would you like to say about Rep. #{rep.last_name}?"
     user_tag = gets.chomp
-    taggable.tag = user_tag
+    taggable.update(tag: user_tag)
   else
     puts "You don't have any tracked reps yet..."
   end
