@@ -10,7 +10,7 @@ With Match Maker you can do the following:
 5. Find a nonprofit by zipcode
 6. Search nonprofits by cause
 7. Get website info by EIN
-8. EXIT"
+8. EXIT
 
 I used a faker gem to populate sample volunteer data into my database.
 
