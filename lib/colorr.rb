@@ -1,5 +1,3 @@
-require_relative '../config/environment'
-
 #there are 2331 colors in the API
 
   #Colorr Class
@@ -14,7 +12,10 @@ require_relative '../config/environment'
     #saturate color
     #desaturate color
 
-class Colorr
+class Colorr < ActiveRecord::Base
+  has_many :colorr_pallets
+  has_many :pallets, through: :colorr_pallets
+
   @@hex_colors = RestClient.get 'https://raw.githubusercontent.com/jonathantneal/color-names/master/color-names.json'
   @@hex_colors_hash = JSON.parse(@@hex_colors)
   # c = Color::RGB.from_html('101aff')
@@ -25,7 +26,9 @@ class Colorr
     #prints the hex val
 
   def self.get_hexval(name)
-    @@hex_colors_hash.key(name)
+    hexval_w_pound = @@hex_colors_hash.key(name)
+    nopound = hexval_w_pound[1..-1]
+    return nopound
   end
 
   def self.print_hexval(name)
@@ -87,24 +90,5 @@ class Colorr
     end
     return @hex_color_and_RGB_hash
   end
-  #test passed!
-
-  # def self.reds
-  #
-  # end
-
-  #print oranges
-
-  #print yellows
-
-  #print greens
-
-  #print blues
-
-  #print purples
-
-  #print random
-
-
 
 end #end of Colorr class
