@@ -56,7 +56,7 @@ def prompt_user
     puts "Please make a selection(ex: 1,2,3):
     1. View all organizations
     2. View all EIN #'s
-    3. Search for org by EIN
+    3. Search for org by Name
     4. Find a nonprofit by city
     5. Find a nonprofit by zipcode
     6. Search nonprofits by cause
