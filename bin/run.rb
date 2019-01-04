@@ -17,4 +17,6 @@ require_relative '../config/environment'
   # puts Pallet.find_analogous_cool("4248ff")
   # puts Pallet.find_complementary("4248ff")
 
+  Cli.run
+
 # bundle exec ruby bin/run.rb
