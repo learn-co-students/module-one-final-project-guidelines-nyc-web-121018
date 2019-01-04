@@ -18,6 +18,7 @@ Bundler.require
 # require 'active-record'
 # require 'sqlite3'
 # require 'rest-client'
+Dotenv.load
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',

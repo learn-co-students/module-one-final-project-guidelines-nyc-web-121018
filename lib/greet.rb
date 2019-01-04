@@ -90,7 +90,8 @@ def prompt_user
       print_org_by_city(city)
       puts ""
     when '5'
-      puts "Please enter an 8 digit zipcode in NYS"
+      available_zipcodes
+      puts "Please enter an 8 digit zipcode in NYS, from the list above"
       zipcode = gets.chomp
       puts " You chose: #{zipcode} "
       find_by_zipcode(zipcode)
