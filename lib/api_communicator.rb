@@ -170,14 +170,27 @@ end
   end
 end
 
-# print all org causes
-def print_causes
+def available_zipcodes
   response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
   orgs.each do |org|
-  puts "Cause:#{org['category']}"
+  puts "#{org['city']} #{org['zipCode']}"
 end
+end
+
+# print all org causes
+def print_causes
+  causes = []
+  response = RestClient.get'http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY'
+  response_hash = JSON.parse(response)
+  orgs = response_hash["data"]
+  orgs.each do |org|
+  cause = org['category']
+  causes << cause
+  # puts "Cause:#{org['category']}"
+end
+ puts causes.uniq
 end
 
 def print_eins

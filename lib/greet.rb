@@ -79,28 +79,29 @@ def prompt_user
       print_eins
       puts "Please enter an ein number"
       ein = gets.strip
-      puts ""
+      puts " You chose: #{ein} "
       org_by_ein(ein)
       puts ""
     when '4'
       print_cities
       puts "Please enter a city from the above list"
       city= gets.strip
-      puts ""
+      puts " You chose: #{city} "
       print_org_by_city(city)
       puts ""
     when '5'
       puts "Please enter an 8 digit zipcode in NYS"
       zipcode = gets.chomp
-      puts ""
+      puts " You chose: #{zipcode} "
       find_by_zipcode(zipcode)
       puts ""
     when '6'
+      puts ""
       print_causes
       puts ""
       puts "Please enter a cause from the above list"
       category = gets.chomp
-      puts ""
+      puts " You chose: #{category} "
       print_org_by_cause(category)
       puts ""
     when '7'
@@ -108,7 +109,7 @@ def prompt_user
       puts "Please enter an EIN from the list above"
       ein=""
       ein = gets.strip
-      puts ""
+      puts " You chose: #{ein} "
       get_url_by_ein(ein)
       puts ""
     when '8'
