@@ -3,9 +3,12 @@ require 'json'
 require 'pry'
 
 #accessing api
+def get_orgs
  response = RestClient.get("http://data.orghunter.com/v1/charitysearch?user_key=ff74d40e5a7c0c5aada5e84ba4030b52&state=NY")
  response_hash = JSON.parse(response)
  orgs = response_hash["data"]
+ return orgs
+end
 
 # get org name when given an ein number
 def charityname(ein)
@@ -104,7 +107,7 @@ def print_org_info(ein)
   response_hash = JSON.parse(response)
   orgs = response_hash["data"]
   orgs.each do |org|
-      if org['ein'] = ein
+      if org['ein'] == ein
       puts "Name: #{org['charityName']}"
       puts "City: #{org['city']}"
       puts "Zipcode: #{org['zipCode']}"
@@ -225,4 +228,10 @@ def get_url_by_ein(ein)
  end
 end
 
+def add_volunteer(first_name,last_name, age)
+ Volunteer.create(id: nil ,first_name: first_name, last_name:last_name, age:age)
+ puts ""
+ puts "Thank you, #{first_name} you have been added!"
+ puts ""
+end
 # binding.pry

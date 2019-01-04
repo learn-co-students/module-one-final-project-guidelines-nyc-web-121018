@@ -2,7 +2,9 @@
 require_relative '../config/environment.rb'
 
 welcome
+
 prompt_user
+
 # Causes/Categories
 # "1. Employment, Job-Related"
 # "2. Not provided"

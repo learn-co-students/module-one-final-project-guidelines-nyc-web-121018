@@ -66,7 +66,8 @@ def prompt_user
     5. Find a nonprofit by zipcode
     6. Search nonprofits by cause
     7. Get website info by EIN
-    8. EXIT"
+    8. Join the Volunteer Database
+    9. EXIT"
 
     input = gets.downcase.strip
     case input
@@ -111,6 +112,14 @@ def prompt_user
       get_url_by_ein(ein)
       puts ""
     when '8'
+      puts "Please enter your first name"
+      first_name = gets.chomp
+      puts "Please enter your last name"
+      last_name = gets.chomp
+      puts "Please enter your age"
+      age = gets.chomp
+      add_volunteer(first_name,last_name, age)
+    when '9'
       break
     else
       puts "Please make a selection from the list provided."
