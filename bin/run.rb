@@ -18,5 +18,4 @@ require_relative '../config/environment'
   # puts Pallet.find_complementary("4248ff")
 
   Cli.run
-
 # bundle exec ruby bin/run.rb

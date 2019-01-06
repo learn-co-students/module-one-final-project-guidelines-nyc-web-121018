@@ -17,20 +17,9 @@
   #color 3 = analogous 2
   #color 4 = complementary
 
-# 1. Convert your colour to HSL.
-#
-# 2. Change the Hue value to that of the Hue opposite (e.g., if your Hue is 50°, the opposite one will be at 230° on the wheel — 180° further around).
-#
-# 3. Leave the Saturation and Lightness values as they were.
-#
-# 4. Convert this new HSL value back to your original colour notation (RGB or whatever).
-
 class Pallet < ActiveRecord::Base
   has_many :colorr_pallets
   has_many :colorrs, through: :colorr_pallets
-
-  @@hex_colors = RestClient.get 'https://raw.githubusercontent.com/jonathantneal/color-names/master/color-names.json'
-  @@hex_colors_hash = JSON.parse(@@hex_colors)
 
   def self.rgb_arr_to_hex(rgb_arr)
     hexval = ""
@@ -64,31 +53,31 @@ class Pallet < ActiveRecord::Base
     if rgb_arr.max == r
       ar = r
       ab = b
-      ag = g += 150
+      ag = g += 100
     end
     if rgb_arr.max == g
       ag = g
       ab = b
-      ar = r += 150
+      ar = r += 100
     end
     if rgb_arr.max == b
       ag = g
       ab = b
-      ar = r += 150
+      ar = r += 100
     end
     if rgb_arr.max == r && rgb_arr.max == g
-      ag = g - 150
+      ag = g - 100
       ab = b
       ar = r
     end
     if rgb_arr.max == g && rgb_arr.max == b
       ag = g
-      ab = b - 150
+      ab = b - 100
       ar = r
     end
     if rgb_arr.max == r && rgb_arr.max == b
       ag = g
-      ab = b - 150
+      ab = b - 100
       ar = r
     end
     if ar > 255
@@ -125,33 +114,33 @@ class Pallet < ActiveRecord::Base
     ab = 0
     if rgb_arr.max == r
       ar = r
-      ab = b += 150
+      ab = b += 100
       ag = g
     end
     if rgb_arr.max == g
       ag = g
-      ab = b += 150
+      ab = b += 100
       ar = r
     end
     if rgb_arr.max == b
-      ag = g += 150
+      ag = g += 100
       ab = b
       ar = r
     end
     if rgb_arr.max == r && rgb_arr.max == g
       ag = g
       ab = b
-      ar = r - 150
+      ar = r - 100
     end
     if rgb_arr.max == g && rgb_arr.max == b
-      ag = g - 150
+      ag = g - 100
       ab = b
       ar = r
     end
     if rgb_arr.max == r && rgb_arr.max == b
       ag = g
       ab = b
-      ar = r - 150
+      ar = r - 100
     end
     if ar > 255
       ar = 255
@@ -195,16 +184,19 @@ class Pallet < ActiveRecord::Base
   def self.print_pallet_from_id(id)
     Pallet.all.each do |instance|
       if id == instance.id
+        puts "Your color's Origin Color is: #{instance.origin_color}"
         puts "Your color's Analogous warm is: #{instance.analogous_warm}"
         puts "Your color's Analogous cool is: #{instance.analogous_cool}"
         puts "Your color's Complement is: #{instance.complementary}"
+        puts ""
       end
     end
   end
 
   def self.print_pallet(hexval)
     Pallet.all.each do |instance|
-      if hexval == instance.input_color
+      if hexval == instance.origin_color
+        puts "Your color's Origin Color is: #{instance.origin_color}"
         puts "Your color's Analogous warm is: #{instance.analogous_warm}"
         puts "Your color's Analogous cool is: #{instance.analogous_cool}"
         puts "Your color's Complement is: #{instance.complementary}"

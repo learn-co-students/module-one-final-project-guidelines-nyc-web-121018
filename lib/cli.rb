@@ -1,38 +1,38 @@
 class Cli
   def self.welcome
-    puts "🌈 Hello! Welcome to the Colorr cli! 🌈"
+    puts "Hello! Welcome to the Colorr cli!"
   end
 
-  def self.help
-    help = <<-HELP
-    🌈 Commands:
-    ❤️  help : displays this message
-    🧡 colorr : lets you choose a color to palletize(tm)
-    💛 learn : learn about the pallets!
-    💚 exit : exits this program
-    HELP
+  def self.home
+    help = <<-MENU
+    Home:
+    - 1 : enter a hex color to palletize(tm)!
+    - 2 : get a random hex color
+    - 3 : learn about the pallets!
+    - 4 : exits this program
+    MENU
 
     puts help
   end
 
   def self.colorr
-    puts "🌈 Please enter a Hex Color Code:"
+    puts "Please enter a Hex Color Code:"
     input_hex_color = gets.chomp.to_s
 
-    colorr_menu = <<-HELP
-    🌈 Commands:
-    💜 1 : view the color's name
-    💙 2 : view the color's pallet
-    💚 3 : view other pallets that contain the color
-    💛 4 : view the color with the most pallets
-    🧡 5 : back to help
-    HELP
+    colorr_menu = <<-MENU
+    Colorr Commands:
+    - 1 : view the color's name
+    - 2 : view the color's pallet
+    - 3 : view other pallets that contain the color
+    - 4 : view the color with the most pallets
+    - 5 : back to home
+    MENU
 
     puts colorr_menu
 
     input = ""
     while input
-      puts "🌈 Please enter a command:"
+      puts "Please enter a command:"
       input = gets.chomp.to_s
       case input
       when "1"
@@ -41,15 +41,16 @@ class Cli
         Pallet.print_pallet(input_hex_color)
       when "3"
         x = Colorr.print_other_pallets(input_hex_color)
+        puts x
         x.each do |i|
           Pallet.print_pallet_from_id(i)
         end
       when "4"
         x = ColorrPallet.color_with_most_pallets
-        puts Colorr.find(x.join.to_i).name
+        puts Colorr.find(x.join.to_i).name,Colorr.find(x.join.to_i).hexvalue
       when "5"
         Cli.exit_colorr
-        Cli.help
+        Cli.home
         break
       end
     end
@@ -57,7 +58,7 @@ class Cli
   end
 
   def self.learn
-    learn_menu = <<-HELP
+    learn_menu = <<-MENU
     - Analogous : groups of three colors that
     -   are next to each other on the color wheel
     -   because of this they are considered more
@@ -77,7 +78,7 @@ class Cli
     -   they are the definition of clashing!
     -   Good to use when you want to make a bold
     -   statement.
-    HELP
+    MENU
 
     puts learn_menu
   end
@@ -88,27 +89,28 @@ class Cli
 
   def self.run
     Cli.welcome
-    Cli.help
+    Cli.home
 
     input = ""
     while input
       puts "Please enter a command:"
       input = gets.downcase.strip
       case input
-      when 'colorr'
+      when '1'
         Cli.colorr
-      when 'help'
-        Cli.help
-      when 'learn'
+      when '2'
+        # put random color method here
+      when '3'
         Cli.learn
-      when 'exit'
+      when '4'
         Cli.exit_colorr
         break
       else
-        Cli.help
+        Cli.home
       end
     end
   end
+
 
 end #end of class cli
 
